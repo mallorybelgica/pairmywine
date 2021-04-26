@@ -235,6 +235,8 @@ const updateCellarWine = async (req, res) => {
     const wineData = req.body;
     const newValues = { $set: req.body };
 
+    console.log(file, wineData, newValues);
+
     const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
     const imageLink = s3FileURL + `/${file.originalname}`;
 
