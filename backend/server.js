@@ -1,11 +1,16 @@
+"use strict";
+
 const express = require("express");
+const morgan = require("morgan");
+
+const PORT = 8000;
+
 const app = express();
-const port = 8000;
 
-app.get("/", (req, res) => {
-  res.send("Backend server is working");
-});
+app.use(express.json());
+app.use(morgan("dev"));
+app.use(require("./routes"));
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.listen(PORT, function () {
+  console.info(`🌍 Listening on port ${PORT}`);
 });
