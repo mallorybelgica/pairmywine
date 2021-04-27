@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import FoodInputOptions from "./FoodInputOptions";
-import {
-  receiveFoods,
-  receiveFoodsError,
-  receiveWinePairing,
-  receiveWinePairingError,
-} from "../../actions";
+import { receiveWinePairing, receiveWinePairingError } from "../../actions";
 
 const FoodInput = () => {
   const history = useHistory();

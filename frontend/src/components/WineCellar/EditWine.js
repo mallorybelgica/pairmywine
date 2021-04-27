@@ -43,15 +43,12 @@ const EditWine = () => {
       body: data,
     })
       .then((res) => res.text())
-      .then((text) => {
-        console.log(text);
-        history.push(`/wine/${_id}`);
-      })
+      .then(() => history.push(`/wine/${_id}`))
       .catch((err) => console.log(err));
   };
 
   return (
-    <form enctype="multipart/form-data" onSubmit={handleSubmit}>
+    <form encType="multipart/form-data" onSubmit={handleSubmit}>
       <h1>add a wine</h1>
       <Label>upload an image:</Label>
       <Input

@@ -38,7 +38,6 @@ const EditUserAccount = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data);
         dispatch(receiveUserInfo(json.data));
         history.push("/account");
       })
