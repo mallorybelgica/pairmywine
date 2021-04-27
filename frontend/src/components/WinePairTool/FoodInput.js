@@ -13,9 +13,7 @@ import {
 const FoodInput = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const currentFoods = useSelector((state) => ({
-    ...state.foodsListReducer.currentFoods,
-  }));
+  const [foods, setFoods] = useState();
   const [firstOption, setFirstOption] = useState("");
   const [secondOption, setSecondOption] = useState("");
   const [thirdOption, setThirdOption] = useState("");
@@ -25,61 +23,61 @@ const FoodInput = () => {
     fetch("/foods")
       .then((res) => res.json())
       .then((json) => {
-        dispatch(receiveFoods(json.foods));
+        setFoods(json.foods);
       })
       .catch((error) => {
-        dispatch(receiveFoodsError(error));
+        console.log(error);
       });
   }, []);
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/recommendation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstOption,
+        secondOption,
+        thirdOption,
+        fourthOption,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(receiveWinePairing(json.data));
+        history.push("/recommendation");
+      })
+      .catch((error) => {
+        dispatch(receiveWinePairingError(error));
+      });
+  };
+
   return (
     <Wrapper>
-      <Form
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          fetch("/recommendation", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              firstOption,
-              secondOption,
-              thirdOption,
-              fourthOption,
-            }),
-          })
-            .then((res) => res.json())
-            .then((json) => {
-              dispatch(receiveWinePairing(json.data));
-              history.push("/recommendation");
-            })
-            .catch((error) => {
-              dispatch(receiveWinePairingError(error));
-            });
-        }}
-      >
+      <Form onSubmit={handleSubmit}>
         <label htmlFor="food">Select up to 3 main ingredients:</label>
         <Select
           name="firstOption"
           onChange={(ev) => setFirstOption(ev.target.value)}
         >
           <option>Select ingredient:</option>
-          {currentFoods && <FoodInputOptions currentFoods={currentFoods} />}
+          {foods && <FoodInputOptions foods={foods} />}
         </Select>
         <Select
           name="secondOption"
           onChange={(ev) => setSecondOption(ev.target.value)}
         >
           <option>Select ingredient:</option>
-          {currentFoods && <FoodInputOptions currentFoods={currentFoods} />}
+          {foods && <FoodInputOptions foods={foods} />}
         </Select>
         <Select
           name="thirdOption"
           onChange={(ev) => setThirdOption(ev.target.value)}
         >
           <option>Select ingredient:</option>
-          {currentFoods && <FoodInputOptions currentFoods={currentFoods} />}
+          {foods && <FoodInputOptions foods={foods} />}
         </Select>
         <label htmlFor="preparation">Any special preparations?</label>
         <Select
@@ -87,8 +85,8 @@ const FoodInput = () => {
           onChange={(ev) => setFourthOption(ev.target.value)}
         >
           <option>Select preparation:</option>
-          {currentFoods &&
-            Object.entries(currentFoods)
+          {foods &&
+            Object.entries(foods)
               .filter((food) => food[1].family === "Preparation")
               .map((food) => {
                 return (

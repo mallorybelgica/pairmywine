@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import foodsListReducer from "./foodsListReducer";
 import grapesListReducer from "./grapesListReducer";
 import grapeDetailsReducer from "./grapeDetailsReducer";
 import winePairingReducer from "./winePairingReducer";
@@ -10,7 +9,6 @@ import groupsReducer from "./groupsReducer";
 import starRatingReducer from "./starRatingReducer";
 
 export default combineReducers({
-  foodsListReducer,
   grapesListReducer,
   grapeDetailsReducer,
   winePairingReducer,

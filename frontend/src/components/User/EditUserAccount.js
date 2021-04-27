@@ -20,68 +20,66 @@ const EditUserAccount = () => {
   const [password, setPassword] = useState("");
   const currentEmail = userDetails.email;
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/user/edit", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currentEmail,
+        firstName,
+        lastName,
+        birthDate,
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json.data);
+        dispatch(receiveUserInfo(json.data));
+        history.push("/account");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div>
-      <form
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          fetch("/user/edit", {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              currentEmail,
-              firstName,
-              lastName,
-              birthDate,
-              email,
-              password,
-            }),
-          })
-            .then((res) => res.json())
-            .then((json) => {
-              console.log(json.data);
-              dispatch(receiveUserInfo(json.data));
-              history.push("/account");
-            })
-            .catch((err) => console.log(err));
-        }}
-      >
-        <h1>Edit Profile</h1>
-        <Label>First Name</Label>
-        <Input
-          type="text"
-          value={firstName}
-          onChange={(ev) => setFirstName(ev.currentTarget.value)}
-        />
-        <Label>Last Name</Label>
-        <Input
-          type="text"
-          value={lastName}
-          onChange={(ev) => setLastName(ev.currentTarget.value)}
-        />
-        <Label>Date of Birth</Label>
-        <Input
-          type="date"
-          value={birthDate}
-          onChange={(ev) => setBirthDate(ev.currentTarget.value)}
-        />
-        <Label>Email</Label>
-        <Input
-          type="email"
-          value={email}
-          onChange={(ev) => setEmail(ev.currentTarget.value)}
-        />
-        <Label>Password</Label>
-        <Input
-          type="password"
-          value={password}
-          onChange={(ev) => setPassword(ev.currentTarget.value)}
-        />
-        <Button>Submit</Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h1>Edit Profile</h1>
+      <Label>First Name</Label>
+      <Input
+        type="text"
+        value={firstName}
+        onChange={(ev) => setFirstName(ev.currentTarget.value)}
+      />
+      <Label>Last Name</Label>
+      <Input
+        type="text"
+        value={lastName}
+        onChange={(ev) => setLastName(ev.currentTarget.value)}
+      />
+      <Label>Date of Birth</Label>
+      <Input
+        type="date"
+        value={birthDate}
+        onChange={(ev) => setBirthDate(ev.currentTarget.value)}
+      />
+      <Label>Email</Label>
+      <Input
+        type="email"
+        value={email}
+        onChange={(ev) => setEmail(ev.currentTarget.value)}
+      />
+      <Label>Password</Label>
+      <Input
+        type="password"
+        value={password}
+        onChange={(ev) => setPassword(ev.currentTarget.value)}
+      />
+      <Button>Submit</Button>
+    </form>
   );
 };
 

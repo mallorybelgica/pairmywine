@@ -12,8 +12,24 @@ const AccountInfo = () => {
   }));
   const loggedIn = useSelector((state) => state.userInfoReducer.loggedIn);
 
+  const deleteUser = (ev) => {
+    ev.preventDefault();
+    fetch(`/user/${userDetails.email}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(userLogout());
+        history.push("/delete/user");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div>
+    <>
       <h1>My Account</h1>
       {loggedIn === false && (
         <p>Please login or sign up to get access to your account.</p>
@@ -29,32 +45,14 @@ const AccountInfo = () => {
           <h3>password</h3>
           <p>**********</p>
           <ButtonsWrapper>
-            <Button
-              onClick={(ev) => {
-                ev.preventDefault();
-                fetch(`/user/${userDetails.email}`, {
-                  method: "DELETE",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                })
-                  .then((res) => res.json())
-                  .then((json) => {
-                    dispatch(userLogout());
-                    history.push("/delete/user");
-                  })
-                  .catch((err) => console.log(err));
-              }}
-            >
-              delete profile
-            </Button>
+            <Button onClick={deleteUser}>delete profile</Button>
             <Link to={"/user/edit"}>
               <Button>edit profile</Button>
             </Link>
           </ButtonsWrapper>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

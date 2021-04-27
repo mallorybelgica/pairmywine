@@ -1,9 +1,9 @@
 import React from "react";
 
-const FoodInputOptions = ({ currentFoods }) => {
+const FoodInputOptions = ({ foods }) => {
   return (
     <>
-      {Object.entries(currentFoods)
+      {Object.entries(foods)
         .filter((food) => food[1].family !== "Preparation")
         .map((food) => {
           return (

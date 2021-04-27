@@ -29,11 +29,7 @@ const WineCellar = () => {
   }, []);
 
   if (status === "loading") {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

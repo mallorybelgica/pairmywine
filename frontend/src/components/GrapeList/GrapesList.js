@@ -29,9 +29,6 @@ const GrapesList = () => {
       .catch((error) => {
         dispatch(receiveGrapesError(error));
       });
-  }, []);
-
-  useEffect(() => {
     fetch("/wines/groups")
       .then((res) => res.json())
       .then((json) => {
@@ -43,11 +40,7 @@ const GrapesList = () => {
   }, []);
 
   if (status === "loading") {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

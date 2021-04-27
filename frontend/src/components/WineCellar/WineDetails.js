@@ -26,34 +26,28 @@ const WineDetails = () => {
       });
   }, [_id]);
 
+  const deleteWine = (ev) => {
+    ev.preventDefault();
+    fetch(`/cellar/wine/${_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => history.push("/cellar"))
+      .catch((err) => console.log(err));
+  };
+
   if (status === "loading") {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
     <div>
       <WinePoints wineDetails={wineDetails} />
       <ButtonsWrapper>
-        <Button
-          onClick={(ev) => {
-            ev.preventDefault();
-            fetch(`/cellar/wine/${_id}`, {
-              method: "DELETE",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((res) => res.json())
-              .then((json) => history.push("/cellar"))
-              .catch((err) => console.log(err));
-          }}
-        >
-          delete wine
-        </Button>
+        <Button onClick={deleteWine}>delete wine</Button>
         <Link to={`/edit/wine/${_id}`}>
           <Button>edit wine</Button>
         </Link>

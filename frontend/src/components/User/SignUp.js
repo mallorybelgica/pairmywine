@@ -10,65 +10,63 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        birthDate,
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => history.push("/login"))
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div>
-      <form
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          fetch("/user/signup", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              firstName,
-              lastName,
-              birthDate,
-              email,
-              password,
-            }),
-          })
-            .then((res) => res.json())
-            .then((json) => history.push("/login"))
-            .catch((err) => console.log(err));
-        }}
-      >
-        <h1>sign up</h1>
-        <Label>First Name</Label>
-        <Input
-          type="text"
-          value={firstName}
-          onChange={(ev) => setFirstName(ev.currentTarget.value)}
-        />
-        <Label>Last Name</Label>
-        <Input
-          type="text"
-          value={lastName}
-          onChange={(ev) => setLastName(ev.currentTarget.value)}
-        />
-        <Label>Date of Birth</Label>
-        <Input
-          type="date"
-          value={birthDate}
-          onChange={(ev) => setBirthDate(ev.currentTarget.value)}
-        />
-        <Label>Email</Label>
-        <Input
-          type="email"
-          value={email}
-          onChange={(ev) => setEmail(ev.currentTarget.value)}
-        />
-        <Label>Password</Label>
-        <Input
-          type="password"
-          value={password}
-          onChange={(ev) => setPassword(ev.currentTarget.value)}
-        />
-        <ButtonWrapper>
-          <Button>Submit</Button>
-        </ButtonWrapper>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h1>sign up</h1>
+      <Label>First Name</Label>
+      <Input
+        type="text"
+        value={firstName}
+        onChange={(ev) => setFirstName(ev.currentTarget.value)}
+      />
+      <Label>Last Name</Label>
+      <Input
+        type="text"
+        value={lastName}
+        onChange={(ev) => setLastName(ev.currentTarget.value)}
+      />
+      <Label>Date of Birth</Label>
+      <Input
+        type="date"
+        value={birthDate}
+        onChange={(ev) => setBirthDate(ev.currentTarget.value)}
+      />
+      <Label>Email</Label>
+      <Input
+        type="email"
+        value={email}
+        onChange={(ev) => setEmail(ev.currentTarget.value)}
+      />
+      <Label>Password</Label>
+      <Input
+        type="password"
+        value={password}
+        onChange={(ev) => setPassword(ev.currentTarget.value)}
+      />
+      <ButtonWrapper>
+        <Button>Submit</Button>
+      </ButtonWrapper>
+    </form>
   );
 };
 

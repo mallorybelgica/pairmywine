@@ -34,9 +34,6 @@ const Recommendation = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  useEffect(() => {
     fetch("/wines/groups")
       .then((res) => res.json())
       .then((json) => {
@@ -49,11 +46,7 @@ const Recommendation = () => {
   }, []);
 
   if (status === "loading") {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -65,18 +58,19 @@ const Recommendation = () => {
           singleGrapes &&
           currentGroups &&
           recommendedWines &&
-          dispatch &&
           wines.map((wine) => {
             const wineGroup = Object.values(currentGroups).find(
               (group) => group._id === wine.groupId
             );
             return (
-              <GrapeWrapper key={wine._id}>
-                <StyledLink to={`/grape/${wine._id}`}>
-                  <GrapeName>{wine.name}</GrapeName>
-                  <Group>{wineGroup.Group}</Group>
-                </StyledLink>
-              </GrapeWrapper>
+              wineGroup && (
+                <GrapeWrapper key={wine._id}>
+                  <StyledLink to={`/grape/${wine._id}`}>
+                    <GrapeName>{wine.name}</GrapeName>
+                    <Group>{wineGroup.Group}</Group>
+                  </StyledLink>
+                </GrapeWrapper>
+              )
             );
           })}
       </List>

@@ -25,91 +25,88 @@ const EditWine = () => {
   const [price, setPrice] = useState(wineDetails.price);
   const [notes, setNotes] = useState(wineDetails.notes);
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    const data = new FormData(ev.target);
+    data.append("email", email);
+    data.append("file", file);
+    data.append("name", name);
+    data.append("producer", producer);
+    data.append("region", region);
+    data.append("year", year);
+    data.append("grape", grape);
+    data.append("price", price);
+    data.append("rating", newRating);
+    data.append("notes", notes);
+    fetch(`/cellar/wine/${_id}`, {
+      method: "PATCH",
+      body: data,
+    })
+      .then((res) => res.text())
+      .then((text) => {
+        console.log(text);
+        history.push(`/wine/${_id}`);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div>
-      <form
-        enctype="multipart/form-data"
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          const data = new FormData(ev.target);
-          data.append("email", email);
-          data.append("file", file);
-          data.append("name", name);
-          data.append("producer", producer);
-          data.append("region", region);
-          data.append("year", year);
-          data.append("grape", grape);
-          data.append("price", price);
-          data.append("rating", newRating);
-          data.append("notes", notes);
-          fetch(`/cellar/wine/${_id}`, {
-            method: "PATCH",
-            body: data,
-          })
-            .then((res) => res.text())
-            .then((text) => {
-              console.log(text);
-              history.push(`/wine/${_id}`);
-            })
-            .catch((err) => console.log(err));
+    <form enctype="multipart/form-data" onSubmit={handleSubmit}>
+      <h1>add a wine</h1>
+      <Label>upload an image:</Label>
+      <Input
+        type="file"
+        onChange={(ev) => {
+          setFile(ev.target.files[0]);
         }}
-      >
-        <h1>add a wine</h1>
-        <Label>upload an image:</Label>
-        <Input
-          type="file"
-          onChange={(ev) => {
-            setFile(ev.target.files[0]);
-          }}
-        />
-        <Label>name</Label>
-        <Input
-          type="text"
-          value={name}
-          onChange={(ev) => setName(ev.currentTarget.value)}
-        />
-        <Label>producer</Label>
-        <Input
-          type="text"
-          value={producer}
-          onChange={(ev) => setProducer(ev.currentTarget.value)}
-        />
-        <Label>region</Label>
-        <Input
-          type="text"
-          value={region}
-          onChange={(ev) => setRegion(ev.currentTarget.value)}
-        />
-        <Label>year</Label>
-        <Input
-          type="number"
-          value={year}
-          onChange={(ev) => setYear(ev.currentTarget.value)}
-        />
-        <Label>grape</Label>
-        <Input
-          type="text"
-          value={grape}
-          onChange={(ev) => setGrape(ev.currentTarget.value)}
-        />
-        <Label>price</Label>
-        <Input
-          type="number"
-          value={price}
-          onChange={(ev) => setPrice(ev.currentTarget.value)}
-        />
-        <Label>rating</Label>
-        <StarRating value={wineDetails.rating} />
-        <Input type="hidden" value={rating} />
-        <Label>notes</Label>
-        <TextArea
-          type="text"
-          value={notes}
-          onChange={(ev) => setNotes(ev.currentTarget.value)}
-        />
-        <Button>Submit</Button>
-      </form>
-    </div>
+      />
+      <Label>name</Label>
+      <Input
+        type="text"
+        value={name}
+        onChange={(ev) => setName(ev.currentTarget.value)}
+      />
+      <Label>producer</Label>
+      <Input
+        type="text"
+        value={producer}
+        onChange={(ev) => setProducer(ev.currentTarget.value)}
+      />
+      <Label>region</Label>
+      <Input
+        type="text"
+        value={region}
+        onChange={(ev) => setRegion(ev.currentTarget.value)}
+      />
+      <Label>year</Label>
+      <Input
+        type="number"
+        value={year}
+        onChange={(ev) => setYear(ev.currentTarget.value)}
+      />
+      <Label>grape</Label>
+      <Input
+        type="text"
+        value={grape}
+        onChange={(ev) => setGrape(ev.currentTarget.value)}
+      />
+      <Label>price</Label>
+      <Input
+        type="number"
+        value={price}
+        onChange={(ev) => setPrice(ev.currentTarget.value)}
+      />
+      <Label>rating</Label>
+      <StarRating value={wineDetails.rating} />
+      <Input type="hidden" value={rating} />
+      <Label>notes</Label>
+      <TextArea
+        type="text"
+        value={notes}
+        onChange={(ev) => setNotes(ev.currentTarget.value)}
+      />
+      <Button>Submit</Button>
+    </form>
   );
 };
 

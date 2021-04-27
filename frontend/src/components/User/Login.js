@@ -11,62 +11,57 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    fetch("/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(receiveUserInfo(json.data));
+        if (json.status === 200) {
+          history.push("/cellar");
+        } else if (json.status === 401) {
+          setMessage("Email or password does not match our credentials.");
+        }
+      })
+      .catch((error) => {
+        dispatch(userLoginError(error));
+      });
+  };
+
   return (
-    <Wrapper>
-      <form
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          fetch("/user/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email,
-              password,
-            }),
-          })
-            .then((res) => res.json())
-            .then((json) => {
-              dispatch(receiveUserInfo(json.data));
-              if (json.status === 200) {
-                history.push("/cellar");
-              } else if (json.status === 401) {
-                //return div instead
-                setMessage("Email or password does not match our credentials.");
-              }
-            })
-            .catch((error) => {
-              dispatch(userLoginError(error));
-            });
-        }}
-      >
-        <h1>login</h1>
-        <p>Please login to get access to your cellar.</p>
-        <Label>Email</Label>
-        <Input
-          type="email"
-          value={email}
-          onChange={(ev) => setEmail(ev.currentTarget.value)}
-        />
-        <Label>Password</Label>
-        <Input
-          type="password"
-          value={password}
-          onChange={(ev) => setPassword(ev.currentTarget.value)}
-        />
-        <ButtonWrapper>
-          <Button>Sign In</Button>
-        </ButtonWrapper>
-        <Message>{message}</Message>
-      </form>
-    </Wrapper>
+    <form onSubmit={handleSubmit}>
+      <h1>login</h1>
+      <p>Please login to get access to your cellar.</p>
+      <Label>Email</Label>
+      <Input
+        type="email"
+        value={email}
+        onChange={(ev) => setEmail(ev.currentTarget.value)}
+      />
+      <Label>Password</Label>
+      <Input
+        type="password"
+        value={password}
+        onChange={(ev) => setPassword(ev.currentTarget.value)}
+      />
+      <ButtonWrapper>
+        <Button>Sign In</Button>
+      </ButtonWrapper>
+      <Message>{message}</Message>
+    </form>
   );
 };
 
 export default Login;
-
-const Wrapper = styled.div``;
 
 const Message = styled.p`
   color: red;
