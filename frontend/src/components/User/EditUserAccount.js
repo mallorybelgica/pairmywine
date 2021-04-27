@@ -17,10 +17,8 @@ const EditUserAccount = () => {
   const [lastName, setLastName] = useState(userDetails.lastName);
   const [birthDate, setBirthDate] = useState(currentBirthdate.toString());
   const [email, setEmail] = useState(userDetails.email);
-  const [password, setPassword] = useState(userDetails.pwd);
+  const [password, setPassword] = useState("");
   const currentEmail = userDetails.email;
-
-  console.log(userDetails);
 
   return (
     <div>
@@ -28,7 +26,7 @@ const EditUserAccount = () => {
         onSubmit={(ev) => {
           ev.preventDefault();
           fetch("/user/edit", {
-            method: "PUT",
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },

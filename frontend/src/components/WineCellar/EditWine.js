@@ -43,7 +43,7 @@ const EditWine = () => {
           data.append("rating", newRating);
           data.append("notes", notes);
           fetch(`/cellar/wine/${_id}`, {
-            method: "PUT",
+            method: "PATCH",
             body: data,
           })
             .then((res) => res.text())

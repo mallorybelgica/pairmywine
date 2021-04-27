@@ -235,45 +235,55 @@ const updateCellarWine = async (req, res) => {
     const wineData = req.body;
     const newValues = { $set: req.body };
 
-    console.log(file, wineData, newValues);
-
-    const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
-    const imageLink = s3FileURL + `/${file.originalname}`;
-
-    const s3bucket = new AWS.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION,
-    });
-
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: file.originalname,
-      Body: file.buffer,
-      ContentType: "file.mimetype",
-      ACL: "public-read",
-    };
-
-    s3bucket.upload(params, function (err, data) {
-      if (err) {
-        throw err;
-      }
-      console.log({ data });
-    });
-
-    wineData.image = s3FileURL + `/${file.originalname}`;
-
     await client.connect();
     const db = client.db(dbName);
     console.log("connected");
 
-    const results = await db
-      .collection("userWines")
-      .updateOne({ _id: ObjectId(_id) }, newValues);
-    assert.equal(1, results.matchedCount);
-    assert.equal(1, results.modifiedCount);
+    if (file === undefined) {
+      const results = await db
+        .collection("userWines")
+        .updateOne({ _id: ObjectId(_id) }, newValues);
+      assert.equal(1, results.matchedCount);
+      assert.equal(1, results.modifiedCount);
 
-    res.status(204).json({ status: 204, message: results });
+      res.status(204).json({ status: 204, message: results });
+    } else if (file) {
+      console.log(file, wineData, newValues);
+
+      const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
+      const imageLink = s3FileURL + `/${file.originalname}`;
+
+      const s3bucket = new AWS.S3({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: process.env.AWS_REGION,
+      });
+
+      const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: file.originalname,
+        Body: file.buffer,
+        ContentType: "file.mimetype",
+        ACL: "public-read",
+      };
+
+      s3bucket.upload(params, function (err, data) {
+        if (err) {
+          throw err;
+        }
+        console.log({ data });
+      });
+
+      wineData.image = s3FileURL + `/${file.originalname}`;
+
+      const results = await db
+        .collection("userWines")
+        .updateOne({ _id: ObjectId(_id) }, newValues);
+      assert.equal(1, results.matchedCount);
+      assert.equal(1, results.modifiedCount);
+
+      res.status(204).json({ status: 204, message: results });
+    }
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
@@ -421,44 +431,77 @@ const editUserInfo = async (req, res) => {
       password,
       currentEmail,
     } = req.body;
-    const securePwd = bcrypt.hashSync(password, 10);
-
-    const newValues = {
-      $set: {
-        firstName: firstName,
-        lastName: lastName,
-        birthDate: birthDate,
-        email: email,
-        pwd: securePwd,
-      },
-    };
-
-    const newEmail = { $set: { email: email } };
 
     await client.connect();
 
     const db = client.db(dbName);
     console.log("connected");
 
-    const results = await db
-      .collection("users")
-      .updateOne({ email: currentEmail }, newValues);
-    assert.equal(1, results.matchedCount);
-    assert.equal(1, results.modifiedCount);
+    if (password === "") {
+      const newValues = {
+        $set: {
+          firstName: firstName,
+          lastName: lastName,
+          birthDate: birthDate,
+          email: email,
+        },
+      };
 
-    const wineResults = await db
-      .collection("userWines")
-      .updateOne({ email: currentEmail }, newEmail);
-    assert.equal(1, results.matchedCount);
-    assert.equal(1, results.modifiedCount);
+      const newEmail = { $set: { email: email } };
+      const results = await db
+        .collection("users")
+        .updateOne({ email: currentEmail }, newValues);
+      assert.equal(1, results.matchedCount);
+      assert.equal(1, results.modifiedCount);
 
-    await db.collection("users").findOne({ email }, (err, result) => {
-      result
-        ? res.status(200).json({ status: 200, email, data: result })
-        : res
-            .status(404)
-            .json({ status: 404, email, data: "User does not exist." });
-    });
+      const wineResults = await db
+        .collection("userWines")
+        .updateOne({ email: currentEmail }, newEmail);
+      assert.equal(1, results.matchedCount);
+      assert.equal(1, results.modifiedCount);
+
+      await db.collection("users").findOne({ email }, (err, result) => {
+        result
+          ? res.status(200).json({ status: 200, email, data: result })
+          : res
+              .status(404)
+              .json({ status: 404, email, data: "User does not exist." });
+      });
+    } else if (password) {
+      const securePwd = bcrypt.hashSync(password, 10);
+
+      const newValues = {
+        $set: {
+          firstName: firstName,
+          lastName: lastName,
+          birthDate: birthDate,
+          email: email,
+          pwd: securePwd,
+        },
+      };
+
+      const newEmail = { $set: { email: email } };
+
+      const results = await db
+        .collection("users")
+        .updateOne({ email: currentEmail }, newValues);
+      assert.equal(1, results.matchedCount);
+      assert.equal(1, results.modifiedCount);
+
+      const wineResults = await db
+        .collection("userWines")
+        .updateOne({ email: currentEmail }, newEmail);
+      assert.equal(1, results.matchedCount);
+      assert.equal(1, results.modifiedCount);
+
+      await db.collection("users").findOne({ email }, (err, result) => {
+        result
+          ? res.status(200).json({ status: 200, email, data: result })
+          : res
+              .status(404)
+              .json({ status: 404, email, data: "User does not exist." });
+      });
+    }
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }

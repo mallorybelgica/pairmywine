@@ -40,7 +40,7 @@ const GrapesList = () => {
       .catch((error) => {
         dispatch(receiveGroupsError(error));
       });
-  }, [receiveGrapes]);
+  }, []);
 
   if (status === "loading") {
     return (
