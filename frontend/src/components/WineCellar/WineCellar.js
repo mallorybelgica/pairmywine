@@ -39,11 +39,13 @@ const WineCellar = () => {
         <Notice>Please login or sign up to get access to your cellar.</Notice>
       )}
       {loggedIn === true && <NewWine to="/add/wine">+</NewWine>}
-      {userDetails &&
-        cellarDetails &&
-        Object.values(cellarDetails).map((wine) => {
-          return <WineCellarItem key={wine._id} wine={wine} />;
-        })}
+      <div>
+        {userDetails &&
+          cellarDetails &&
+          Object.values(cellarDetails).map((wine) => {
+            return <WineCellarItem key={wine._id} wine={wine} />;
+          })}
+      </div>
     </Wrapper>
   );
 };
@@ -52,6 +54,16 @@ export default WineCellar;
 
 const Wrapper = styled.div`
   width: 100%;
+`;
+
+const ItemsWrapper = styled.div`
+  width: 100%;
+
+  @media only screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 24px;
+  }
 `;
 
 const Notice = styled.div`
