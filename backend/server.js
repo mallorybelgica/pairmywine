@@ -15,6 +15,6 @@ app.get("/", async (req, res) => {
   res.status(200).json({ message: "Greetings from the backend!" });
 });
 
-app.listen(PORT, function () {
+app.listen(PORT, "0.0.0.0", function () {
   console.info(`🌍 Listening on port ${PORT}`);
 });
