@@ -20,7 +20,6 @@ export default WineCellarItem;
 
 const Wrapper = styled.div`
   padding: 16px;
-  background: #fff;
   box-shadow: 3px 2.8px 2.2px rgba(0, 0, 0, 0.07),
     3px 6.7px 5.3px rgba(0, 0, 0, 0.05), 3px 12.5px 10px rgba(0, 0, 0, 0.042),
     3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
