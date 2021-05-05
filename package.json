@@ -1,0 +1,23 @@
+{
+  "name": "pairmywine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "15.x",
+    "npm": "7.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcb-creative/pairmywine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcb-creative/pairmywine/issues"
+  },
+  "homepage": "https://github.com/mcb-creative/pairmywine#readme"
+}
