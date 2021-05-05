@@ -39,13 +39,13 @@ const WineCellar = () => {
         <Notice>Please login or sign up to get access to your cellar.</Notice>
       )}
       {loggedIn === true && <NewWine to="/add/wine">+</NewWine>}
-      <div>
+      <ItemsWrapper>
         {userDetails &&
           cellarDetails &&
           Object.values(cellarDetails).map((wine) => {
             return <WineCellarItem key={wine._id} wine={wine} />;
           })}
-      </div>
+      </ItemsWrapper>
     </Wrapper>
   );
 };
