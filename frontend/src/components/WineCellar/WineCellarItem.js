@@ -4,17 +4,30 @@ import { Link } from "react-router-dom";
 
 const WineCellarItem = ({ wine }) => {
   return (
-    <StyledLink to={`/wine/${wine._id}`}>
-      <Details>
-        <WineImage src={wine.image} alt="wine-bottle" />
-        <WineName>{wine.name}</WineName>
-        <WinePrice>${wine.price}</WinePrice>
-      </Details>
-    </StyledLink>
+    <Wrapper>
+      <StyledLink to={`/wine/${wine._id}`}>
+        <Details>
+          <WineImage src={wine.image} alt="wine-bottle" />
+          <WineName>{wine.name}</WineName>
+          <WinePrice>${wine.price}</WinePrice>
+        </Details>
+      </StyledLink>
+    </Wrapper>
   );
 };
 
 export default WineCellarItem;
+
+const Wrapper = styled.div`
+  padding: 16px;
+  background: #fff;
+  box-shadow: 3px 2.8px 2.2px rgba(0, 0, 0, 0.07),
+    3px 6.7px 5.3px rgba(0, 0, 0, 0.05), 3px 12.5px 10px rgba(0, 0, 0, 0.042),
+    3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
+    3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
+  border-radius: 16px;
+  text-align: center;
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
