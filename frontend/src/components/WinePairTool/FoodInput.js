@@ -15,7 +15,7 @@ const FoodInput = () => {
   const [fourthOption, setFourthOption] = useState("");
 
   useEffect(() => {
-    fetch("/foods")
+    fetch(`${process.env.REACT_APP_API_URL}/foods`)
       .then((res) => res.json())
       .then((json) => {
         setFoods(json.foods);
@@ -27,7 +27,7 @@ const FoodInput = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    fetch("/recommendation", {
+    fetch(`${process.env.REACT_APP_API_URL}/recommendation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

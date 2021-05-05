@@ -16,7 +16,7 @@ const WineDetails = () => {
   }));
 
   useEffect(() => {
-    fetch(`/cellar/wine/${_id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/cellar/wine/${_id}`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(receiveWineDetails(json.data));
@@ -28,7 +28,7 @@ const WineDetails = () => {
 
   const deleteWine = (ev) => {
     ev.preventDefault();
-    fetch(`/cellar/wine/${_id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cellar/wine/${_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

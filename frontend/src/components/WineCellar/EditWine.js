@@ -38,7 +38,7 @@ const EditWine = () => {
     data.append("price", price);
     data.append("rating", newRating);
     data.append("notes", notes);
-    fetch(`/cellar/wine/${_id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cellar/wine/${_id}`, {
       method: "PATCH",
       body: data,
     })

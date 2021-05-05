@@ -18,7 +18,7 @@ const Recommendation = () => {
   const [wines, setWines] = useState([]);
 
   useEffect(() => {
-    fetch("/recommendation/grapes", {
+    fetch(`${process.env.REACT_APP_API_URL}/recommendation/grapes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const Recommendation = () => {
       .catch((error) => {
         console.log(error);
       });
-    fetch("/wines/groups")
+    fetch(`${process.env.REACT_APP_API_URL}/wines/groups`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(receiveGroups(json.data));

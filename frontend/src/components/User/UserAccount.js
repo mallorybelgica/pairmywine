@@ -14,7 +14,7 @@ const AccountInfo = () => {
 
   const deleteUser = (ev) => {
     ev.preventDefault();
-    fetch(`/user/${userDetails.email}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${userDetails.email}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

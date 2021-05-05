@@ -33,7 +33,7 @@ const NewWine = () => {
     data.append("price", price);
     data.append("rating", rating);
     data.append("notes", notes);
-    fetch("/cellar/wine", {
+    fetch(`${process.env.REACT_APP_API_URL}/cellar/wine`, {
       method: "POST",
       body: data,
     })

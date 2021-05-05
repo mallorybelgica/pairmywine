@@ -22,7 +22,7 @@ const EditUserAccount = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    fetch("/user/edit", {
+    fetch(`${process.env.REACT_APP_API_URL}/user/edit`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

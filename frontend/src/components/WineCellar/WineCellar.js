@@ -18,7 +18,7 @@ const WineCellar = () => {
   }));
 
   useEffect(() => {
-    fetch(`/cellar/${userDetails.email}`)
+    fetch(`${process.env.REACT_APP_API_URL}/cellar/${userDetails.email}`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(receiveCellarDetails(json.data));

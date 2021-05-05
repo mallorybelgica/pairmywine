@@ -21,7 +21,7 @@ const GrapesList = () => {
   }));
 
   useEffect(() => {
-    fetch("/grapes")
+    fetch(`${process.env.REACT_APP_API_URL}/grapes`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(receiveGrapes(json.grapes));
@@ -29,7 +29,7 @@ const GrapesList = () => {
       .catch((error) => {
         dispatch(receiveGrapesError(error));
       });
-    fetch("/wines/groups")
+    fetch(`${process.env.REACT_APP_API_URL}/wines/groups`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(receiveGroups(json.data));

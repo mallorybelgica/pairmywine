@@ -12,7 +12,7 @@ const SignUp = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    fetch("/user/signup", {
+    fetch(`${process.env.REACT_APP_API_URL}/user/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

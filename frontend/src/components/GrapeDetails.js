@@ -7,7 +7,7 @@ const GrapeDetails = () => {
   const [grapeDetails, setGrapeDetails] = useState("");
 
   useEffect(() => {
-    fetch(`/grape/${_id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/grape/${_id}`)
       .then((res) => res.json())
       .then((json) => {
         setGrapeDetails(json.data);
