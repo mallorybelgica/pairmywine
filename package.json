@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/mcb-creative/pairmywine/issues"
   },
-  "homepage": "https://github.com/mcb-creative/pairmywine#readme"
+  "homepage": "https://github.com/mcb-creative/pairmywine#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
