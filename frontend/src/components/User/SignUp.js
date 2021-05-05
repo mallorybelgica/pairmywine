@@ -31,8 +31,8 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>sign up</h1>
+    <Form onSubmit={handleSubmit}>
+      <Title>sign up</Title>
       <Label>First Name</Label>
       <Input
         type="text"
@@ -66,23 +66,35 @@ const SignUp = () => {
       <ButtonWrapper>
         <Button>Submit</Button>
       </ButtonWrapper>
-    </form>
+    </Form>
   );
 };
 
 export default SignUp;
 
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 const Input = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 60%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
 `;
 
 const Label = styled.label`
-  width: 100vw;
+  width: 60%;
 `;
 
 const ButtonWrapper = styled.div`

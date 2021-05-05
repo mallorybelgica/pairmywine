@@ -8,7 +8,11 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
-app.use(cors({ origin: "https://pairmywine-app.netlify.app" }));
+app.use(
+  cors({
+    origin: ["https://pairmywine-app.netlify.app", "http://localhost:3000"],
+  })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(require("./routes"));

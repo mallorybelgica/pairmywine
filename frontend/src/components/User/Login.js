@@ -38,9 +38,9 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>login</h1>
-      <p>Please login to get access to your cellar.</p>
+    <Form onSubmit={handleSubmit}>
+      <Title>login</Title>
+      <Description>Please login to get access to your cellar.</Description>
       <Label>Email</Label>
       <Input
         type="email"
@@ -57,7 +57,7 @@ const Login = () => {
         <Button>Sign In</Button>
       </ButtonWrapper>
       <Message>{message}</Message>
-    </form>
+    </Form>
   );
 };
 
@@ -67,17 +67,34 @@ const Message = styled.p`
   color: red;
 `;
 
+const Form = styled.form`
+  display: flex;
+  width: 100vw;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`;
+
+const Description = styled.p`
+  width: 60%;
+  text-align: left;
+`;
+
 const Input = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 60%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
 `;
 
 const Label = styled.label`
-  width: 100vw;
+  width: 60%;
 `;
 
 const ButtonWrapper = styled.div`
