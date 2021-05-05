@@ -52,7 +52,7 @@ const FoodInput = () => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="food">Select up to 3 main ingredients:</label>
+        <Label htmlFor="food">Select up to 3 main ingredients:</Label>
         <Select
           name="firstOption"
           onChange={(ev) => setFirstOption(ev.target.value)}
@@ -74,7 +74,7 @@ const FoodInput = () => {
           <option>Select ingredient:</option>
           {foods && <FoodInputOptions foods={foods} />}
         </Select>
-        <label htmlFor="preparation">Any special preparations?</label>
+        <Label htmlFor="preparation">Any special preparations?</Label>
         <Select
           name="fourthOption"
           onChange={(ev) => setFourthOption(ev.target.value)}
@@ -91,7 +91,9 @@ const FoodInput = () => {
                 );
               })}
         </Select>
-        <Button>Pair my wine!</Button>
+        <ButtonWrapper>
+          <Button>Pair my wine!</Button>
+        </ButtonWrapper>
       </Form>
     </Wrapper>
   );
@@ -107,8 +109,14 @@ const Wrapper = styled.div`
 
 const Form = styled.form`
   display: flex;
+  width: 100vw;
   flex-wrap: wrap;
   justify-content: center;
+`;
+
+const Label = styled.label`
+  width: 100vw;
+  text-align: center;
 `;
 
 const Select = styled.select`
@@ -118,6 +126,11 @@ const Select = styled.select`
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  text-align: center;
 `;
 
 const Button = styled.button`
