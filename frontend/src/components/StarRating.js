@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveRating } from "../actions";
+import styled from "styled-components";
 
 const Star = ({ marked, starId }) => {
   return (
@@ -24,7 +25,7 @@ const StarRating = ({ value }) => {
     setSelection(val);
   };
   return (
-    <div
+    <Wrapper
       onClick={(e) =>
         dispatch(receiveRating(e.target.getAttribute("data-star-id")))
       }
@@ -37,8 +38,15 @@ const StarRating = ({ value }) => {
           marked={selection ? selection >= i + 1 : rating >= i + 1}
         />
       ))}
-    </div>
+    </Wrapper>
   );
 };
 
 export default StarRating;
+
+const Wrapper = styled.div`
+  width: 75%;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
+`;

@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
   border-radius: 16px;
   text-align: center;
+  margin-bottom: 10px;
 `;
 
 const StyledLink = styled(Link)`

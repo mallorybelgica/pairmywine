@@ -34,7 +34,7 @@ const WineCellar = () => {
 
   return (
     <Wrapper>
-      <h1>my cellar</h1>
+      <Title>my cellar</Title>
       {loggedIn === false && (
         <Notice>Please login or sign up to get access to your cellar.</Notice>
       )}
@@ -58,10 +58,10 @@ const Wrapper = styled.div`
 
 const ItemsWrapper = styled.div`
   width: 100%;
-
+  align-items: center;
   @media only screen and (min-width: 768px) {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-gap: 24px;
   }
 `;
@@ -80,4 +80,9 @@ const NewWine = styled(Link)`
   font-size: 2.5rem;
   font-weight: bold;
   text-decoration: none;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
 `;

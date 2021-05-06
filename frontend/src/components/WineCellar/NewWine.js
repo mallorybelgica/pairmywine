@@ -43,83 +43,115 @@ const NewWine = () => {
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit}>
-      <h1>add a wine</h1>
-      <label>upload an image:</label>
+    <Form encType="multipart/form-data" onSubmit={handleSubmit}>
+      <Title>add a wine</Title>
+      <Label>upload an image:</Label>
       <Input
         type="file"
         onChange={(ev) => {
           setFile(ev.target.files[0]);
         }}
       />
-      <label>name</label>
+      <Label>name</Label>
       <Input
         type="text"
         value={name}
         onChange={(ev) => setName(ev.currentTarget.value)}
       />
-      <label>producer</label>
+      <Label>producer</Label>
       <Input
         type="text"
         value={producer}
         onChange={(ev) => setProducer(ev.currentTarget.value)}
       />
-      <label>region</label>
+      <Label>region</Label>
       <Input
         type="text"
         value={region}
         onChange={(ev) => setRegion(ev.currentTarget.value)}
       />
-      <label>year</label>
+      <Label>year</Label>
       <Input
         type="number"
         value={year}
         onChange={(ev) => setYear(ev.currentTarget.value)}
       />
-      <label>grape</label>
+      <Label>grape</Label>
       <Input
         type="text"
         value={grape}
         onChange={(ev) => setGrape(ev.currentTarget.value)}
       />
-      <label>price</label>
+      <Label>price</Label>
       <Input
         type="number"
         value={price}
         onChange={(ev) => setPrice(ev.currentTarget.value)}
       />
-      <label>rating</label>
+      <Label>rating</Label>
       <StarRating />
       <Input type="hidden" value={rating} />
-      <label>notes</label>
+      <Label>notes</Label>
       <TextArea
         type="text"
         value={notes}
         onChange={(ev) => setNotes(ev.currentTarget.value)}
       />
-      <Button>Submit</Button>
-    </form>
+      <ButtonWrapper>
+        <Button>Submit</Button>
+      </ButtonWrapper>
+    </Form>
   );
 };
 
 export default NewWine;
 
+const Form = styled.form`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`;
+
+const Label = styled.label`
+  width: 75%;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
+`;
+
 const Input = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 75%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const TextArea = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 75%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+  width: 100%;
 `;
 
 const Button = styled.button`

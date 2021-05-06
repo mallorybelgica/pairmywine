@@ -48,8 +48,8 @@ const EditWine = () => {
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit}>
-      <h1>add a wine</h1>
+    <Form encType="multipart/form-data" onSubmit={handleSubmit}>
+      <Title>edit wine</Title>
       <Label>upload an image:</Label>
       <Input
         type="file"
@@ -102,33 +102,62 @@ const EditWine = () => {
         value={notes}
         onChange={(ev) => setNotes(ev.currentTarget.value)}
       />
-      <Button>Submit</Button>
-    </form>
+      <ButtonWrapper>
+        <Button>Submit</Button>
+      </ButtonWrapper>
+    </Form>
   );
 };
 
 export default EditWine;
 
+const Form = styled.form`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`;
+
 const Label = styled.label`
-  width: 100vw;
+  width: 75%;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const Input = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 75%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const TextArea = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 75%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;
 
 const Button = styled.button`

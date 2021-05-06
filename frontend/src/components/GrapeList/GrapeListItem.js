@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 
 const GrapeListItem = ({ grape, wineGroup }) => {
   return (
-    <GrapeWrapper>
-      <StyledLink id={grape[0]} to={`/grape/${grape[0]}`}>
-        <GrapeName key={grape[1].name}>{grape[1].name}</GrapeName>
-        <Group>{wineGroup.Group}</Group>
-      </StyledLink>
-    </GrapeWrapper>
+    grape &&
+    wineGroup && (
+      <GrapeWrapper>
+        <StyledLink id={grape[0]} to={`/grape/${grape[0]}`}>
+          <GrapeName key={grape[1].name}>{grape[1].name}</GrapeName>
+          <Group>{wineGroup.Group}</Group>
+        </StyledLink>
+      </GrapeWrapper>
+    )
   );
 };
 

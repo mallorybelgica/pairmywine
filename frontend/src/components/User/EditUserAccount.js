@@ -45,8 +45,8 @@ const EditUserAccount = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Edit Profile</h1>
+    <Form onSubmit={handleSubmit}>
+      <Title>Edit Profile</Title>
       <Label>First Name</Label>
       <Input
         type="text"
@@ -78,23 +78,41 @@ const EditUserAccount = () => {
         onChange={(ev) => setPassword(ev.currentTarget.value)}
       />
       <Button>Submit</Button>
-    </form>
+    </Form>
   );
 };
 
 export default EditUserAccount;
 
+const Form = styled.form`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`;
+
 const Input = styled.input`
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 75%;
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const Label = styled.label`
-  width: 100vw;
+  width: 75%;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const Button = styled.button`

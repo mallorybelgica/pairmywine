@@ -1,13 +1,19 @@
 import React from "react";
 import FoodInput from "./FoodInput";
+import styled from "styled-components";
 
 const WinePairTool = () => {
   return (
     <div>
-      <h1>pair my wine</h1>
+      <Title>pair my wine</Title>
       <FoodInput />
     </div>
   );
 };
 
 export default WinePairTool;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`;

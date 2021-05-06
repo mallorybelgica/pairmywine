@@ -45,7 +45,7 @@ const GrapesList = () => {
 
   return (
     <div>
-      <h1>Grape Variations</h1>
+      <Title>Grape Variations</Title>
       <List>
         {currentGrapes &&
           currentGroups &&
@@ -71,4 +71,9 @@ export default GrapesList;
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
 `;

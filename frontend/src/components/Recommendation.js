@@ -51,7 +51,7 @@ const Recommendation = () => {
 
   return (
     <div>
-      <h1>Recommendations</h1>
+      <Title>Recommendations</Title>
       <p>Check out your recommendation(s) below:</p>
       <List>
         {wines &&
@@ -83,6 +83,11 @@ export default Recommendation;
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
 `;
 
 const GrapeWrapper = styled.div`

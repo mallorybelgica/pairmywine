@@ -126,6 +126,9 @@ const Select = styled.select`
   border: 1px solid #ccc;
   padding: 2%;
   margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const ButtonWrapper = styled.div`
