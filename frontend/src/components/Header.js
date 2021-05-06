@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { userLogout } from "../actions";
@@ -10,7 +11,7 @@ const Header = () => {
 
   return (
     <HeaderArea>
-      <Logo>Y</Logo>
+      <Logo to="/">Y</Logo>
       {loggedIn === false && (
         <Menu>
           <StyledLink to="/login">LOGIN</StyledLink>
@@ -58,8 +59,9 @@ const Menu = styled.div`
   justify-content: center;
 `;
 
-const Logo = styled.div`
+const Logo = styled(Link)`
   font-family: "Lato", sans-serif;
+  text-decoration: none;
   align-self: center;
   text-align: center;
   font-weight: bold;
