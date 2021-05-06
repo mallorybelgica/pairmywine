@@ -54,7 +54,7 @@ const StyledLink = styled(NavLink)`
 
 const Menu = styled.div`
   display: flex;
-  width: 100%;
+  width: calc(100% - 80px);
   align-self: center;
   justify-content: center;
 `;

@@ -77,7 +77,9 @@ const EditUserAccount = () => {
         value={password}
         onChange={(ev) => setPassword(ev.currentTarget.value)}
       />
-      <Button>Submit</Button>
+      <ButtonWrapper>
+        <Button>Submit</Button>
+      </ButtonWrapper>
     </Form>
   );
 };
@@ -113,6 +115,11 @@ const Label = styled.label`
   @media only screen and (min-width: 768px) {
     width: 60%;
   }
+`;
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+  width: 100%;
 `;
 
 const Button = styled.button`
