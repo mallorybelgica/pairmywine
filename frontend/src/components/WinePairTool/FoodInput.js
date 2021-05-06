@@ -109,13 +109,13 @@ const Wrapper = styled.div`
 
 const Form = styled.form`
   display: flex;
-  width: 100vw;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
 const Label = styled.label`
-  width: 100vw;
+  width: 100%;
   text-align: center;
 `;
 
