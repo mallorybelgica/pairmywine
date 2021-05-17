@@ -21,25 +21,22 @@ const GrapesList = () => {
   }));
 
   useEffect(() => {
-    async function fetchGrapes() {
-      await fetch(`${process.env.REACT_APP_API_URL}/grapes`)
-        .then((res) => res.json())
-        .then((json) => {
-          dispatch(receiveGrapes(json.grapes));
-        })
-        .catch((error) => {
-          dispatch(receiveGrapesError(error));
-        });
-      await fetch(`${process.env.REACT_APP_API_URL}/wines/groups`)
-        .then((res) => res.json())
-        .then((json) => {
-          dispatch(receiveGroups(json.data));
-        })
-        .catch((error) => {
-          dispatch(receiveGroupsError(error));
-        });
-    }
-    fetchGrapes();
+    fetch(`${process.env.REACT_APP_API_URL}/grapes`)
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(receiveGrapes(json.grapes));
+      })
+      .catch((error) => {
+        dispatch(receiveGrapesError(error));
+      });
+    fetch(`${process.env.REACT_APP_API_URL}/wines/groups`)
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(receiveGroups(json.data));
+      })
+      .catch((error) => {
+        dispatch(receiveGroupsError(error));
+      });
   }, []);
 
   if (status === "loading") {

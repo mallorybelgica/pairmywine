@@ -423,14 +423,8 @@ const userLogin = async (req, res) => {
 const editUserInfo = async (req, res) => {
   try {
     const dbName = "pairmywine_app";
-    const {
-      firstName,
-      lastName,
-      birthDate,
-      email,
-      password,
-      currentEmail,
-    } = req.body;
+    const { firstName, lastName, birthDate, email, password, currentEmail } =
+      req.body;
 
     await client.connect();
 
