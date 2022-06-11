@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import FoodInputOptions from "./FoodInputOptions";
 import { receiveWinePairing, receiveWinePairingError } from "../../actions";
+import Loading from "../Loading";
 
 const FoodInput = () => {
   const history = useHistory();
@@ -48,6 +49,10 @@ const FoodInput = () => {
         dispatch(receiveWinePairingError(error));
       });
   };
+
+  if (!foods) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper>
