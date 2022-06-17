@@ -50,7 +50,7 @@ const FoodInput = () => {
       });
   };
 
-  if (!foods) {
+  if (foods.length < 1) {
     return <Loading />;
   }
 
